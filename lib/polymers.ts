@@ -51,7 +51,7 @@ export const POLYMERS: PolymerEntry[] = [
     kind: "Polysaccharid, verzweigt",
     facts: [
       { label: "Baustein", value: "α-D-Glucose", state: "bekannt" },
-      { label: "Bindungen", value: "α(1→4) in den Ketten, α-(1→6) an Verzweigungen", state: "bekannt" },
+      { label: "Bindungen", value: "α-(1→4) in den Ketten, α-(1→6) an Verzweigungen", state: "bekannt" },
       unknownChain,
       { label: "Verzweigungsstruktur der Probe", value: "nicht bekannt", state: "unbekannt" },
     ],
