@@ -49,18 +49,18 @@ function toCompounds(json: any): Compound[] {
     iupac: p.IUPACName,
     smiles: p.SMILES ?? p.IsomericSMILES ?? p.ConnectivitySMILES ?? p.CanonicalSMILES,
     inchi: p.InChI,
-    inchkey: p.InChIKey,
+    inchikey: p.InChIKey,
   }));
 }
 
 export async function byName(name: string): Promise<Compound[]> {
-  const json = await request(`${BASe}/compound/name/${encodeURIComponent(name)}/property/${PROPS}/JSON`);
+  const json = await request(`${BASE}/compound/name/${encodeURIComponent(name)}/property/${PROPS}/JSON`);
   return toCompounds(json);
 }
 
 export async function byCids(cids: number[]): Promise<Compound[]> {
   if (!cids.length) return [];
-  return toCompounds(await request(`${BASE}/compound/cid/${cids.join(",")}/property/${PROPS}/JSON`)));
+  return toCompounds(await request(`${BASE}/compound/cid/${cids.join(",")}/property/${PROPS}/JSON`));
 }
 
 export async function bySmiles(smiles: string): Promise<Compound[]> {
@@ -76,10 +76,10 @@ export async function cidsByFormula(formula: string, max = 12): Promise<number[]
   let json = await request(`${BASE}/compound/fastformula/${encodeURIComponent(formula)}/cids/JSON?MaxRecords=${max}`);
   for (let i = 0; i < 5 && json?.Waiting?.ListKey; i++) {
     await new Promise((r) => setTimeout(r, 1500));
-    json = await request(`${BASe}/compound/listkey/${json.Waiting.ListKey}/cids/JSON?MaxRecords=${max}`);
+    json = await request(`${BASE}/compound/listkey/${json.Waiting.ListKey}/cids/JSON?MaxRecords=${max}`);
   }
   return json?.IdentifierList?.CID ?? [];
 }
 
-export const structureImageUrl = (cid: number) => `${BASe}/compound/cid/${cid}/PNG?image_size=large`;
+export const structureImageUrl = (cid: number) => `${BASE}/compound/cid/${cid}/PNG?image_size=large`;
 export const compoundPageUrl = (cid: number) => `https://pubchem.ncbi.nlm.nih.gov/compound/${cid}`;
