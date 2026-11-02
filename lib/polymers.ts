@@ -60,7 +60,7 @@ export const POLYMERS: PolymerEntry[] = [
   {
     id: "glycogen",
     names: ["glykogen", "glycogen"],
-    title: "Glycogen",
+    title: "Glykogen",
     kind: "Polysaccharid, stark verzweigt, Energiespeicher",
     facts: [
       { label: "Baustein", value: "α-D-Glucose", state: "bekannt" },
