@@ -29,7 +29,7 @@ export default function MoleculeCard({ c }: { c: Compound }) {
             <a className="text-accent underline" href={compoundPageUrl(c.cid)} target="_blank" rel="noreferrer">
               PubChem CID {c.cid}
             </a>
-            . Werte stammen aus der Datenbank , nicht aus eigener Berechnung.
+            . Werte stammen aus der Datenbank, nicht aus eigener Berechnung.
           </p>
         </dl>
       </div>
