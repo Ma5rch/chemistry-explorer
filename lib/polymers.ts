@@ -35,7 +35,7 @@ export const POLYMERS: PolymerEntry[] = [
     id: "amylose",
     names: ["amylose"],
     title: "Amylose",
-    kind: "Polysaccharid, überwiegend unverzweight",
+    kind: "Polysaccharid, überwiegend unverzweigt",
     facts: [
       { label: "Baustein", value: "α-D-Glucose", state: "bekannt" },
       { label: "Bindungen", value: "hauptsächlich α-(1→4)", state: "bekannt" },
