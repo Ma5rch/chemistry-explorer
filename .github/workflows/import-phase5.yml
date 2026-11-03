@@ -2,7 +2,7 @@ name: Import Phase 5
 on:
   push:
     paths:
-      - phase5-source.zip.b64
+      - phase5-import-ready.txt
 
 permissions:
   contents: write
@@ -17,13 +17,13 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Extract Phase 5 project into repository root
+      - name: Reassemble and extract Phase 5
         run: |
-          base64 -d phase5-source.zip.b64 > /tmp/phase5.zip
+          cat phase5-chunk-*.b64 | base64 -d > /tmp/phase5.zip
           mkdir -p /tmp/phase5
           unzip -q /tmp/phase5.zip -d /tmp/phase5
           cp -a /tmp/phase5/chemistry-explorer/. .
-          rm -f phase5-source.zip.b64
+          rm -f phase5-chunk-*.b64 phase5-import-ready.txt
           rm -rf /tmp/phase5 /tmp/phase5.zip
 
       - name: Commit imported project
