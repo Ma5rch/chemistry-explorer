@@ -1,22 +1,22 @@
 # Chemistry Explorer
 
-Kostenlose Chemie-Webanwendung (Schwerpunkt Kohlenhydrate). Next.js App Router, TypeScript, Tailwind CSS.
+Kostenlose Chemie-Webanwendung mit Schwerpunkt Kohlenhydrate. Next.js App Router, TypeScript und Tailwind CSS.
 
-## Stand: Phase 1 und Teil von Phase 2
+## Funktionen
 
-Umgesetzt:
-- Universelles Eingabefeld mit automatischer Erkennung von Name, Summenformel, SMILES und InChI
-- Abfrage bei PubChem (ohne API-Schlüssel, gedrosselt, mit Zwischenspeicher)
-- Vier Identifikationszustände; „eindeutig“ wird bewusst noch nicht vergeben (folgt mit RDKit.js)
-- Mehrdeutige Namen und Summenformeln zeigen Kandidaten
-- Stärke, Amylose, Amylopektin, Glykogen und Cellulose als variable Polymere ohne erfundene Kette
-- Letzte Suchen in IndexedDB, Dunkelmodus, PWA-Manifest
+- Universelles Eingabefeld für Namen, Summenformeln, SMILES und InChI.
+- PubChem-Abfrage ohne API-Schlüssel, mit Drosselung und Zwischenspeicher.
+- Kennzeichnung mehrdeutiger oder nicht sicher identifizierter Ergebnisse.
+- Stärke, Amylose, Amylopektin, Glykogen und Cellulose als variable Polymere ohne erfundene Ketten.
+- Fischer- und Haworth-Projektionen für ausgewählte D-Monosaccharide; Umschaltung zwischen α- und β-Form.
+- Struktur-Editor unter `/editor` mit Ketcher.
+- Lokale Strukturprüfung und Berechnung mit RDKit.js (WebAssembly).
+- PubChem-Abgleich für gezeichnete Strukturen.
+- Letzte Suchen in IndexedDB und PWA-Manifest.
 
-Phase 3 (Teil): Fischer- und Haworth-Ansicht mit α/β für Glucose, Galactose, Mannose (Pyranose) und Fructose (Furanose), aus Konfigurationsmodell erzeugt.
+## Installation und Start
 
-Noch nicht umgesetzt: Sesselkonformation, weitere Zucker, Editor, Glykan-Modell, Nachweisreaktionen, Identifikator, Vergleich, Lernmodus, Service Worker.
-
-## Lokal starten
+Die Datei `.npmrc` aktiviert `legacy-peer-deps=true`, da Ketcher in diesem Projekt React 18 voraussetzt.
 
 ```bash
 npm install
@@ -24,6 +24,12 @@ npm run build
 npm run dev
 ```
 
-## Deployment
+Das Postinstall-Skript kopiert die RDKit-JavaScript- und WebAssembly-Dateien aus `node_modules` nach `public/rdkit`.
 
-GitHub-Repository mit Vercel (Hobby) verbinden oder `vercel` bzw. `vercel --prod` ausführen. Es sind keine Umgebungsvariablen nötig.
+## Wichtige Grenzen
+
+Die Fischer- und Haworth-Zeichnungen decken derzeit nur ausgewählte Ringformen ab. Sesselkonformation, weitere Zucker, Glykan-Modell, Nachweisreaktionen, Vergleichs- und Lernmodus sind noch nicht umgesetzt. Die chemische Zuordnung im Struktur-Editor hängt vom verfügbaren PubChem-Abgleich ab; bei unsicheren Ergebnissen wird kein eindeutiger Name behauptet.
+
+## Kosten
+
+Die verwendeten Bibliotheken und Dienste sind laut Projektplanung kostenlos nutzbar; beachte vor einer Veröffentlichung dennoch die jeweiligen Lizenzen, Nutzungsbedingungen und kostenlosen Kontingente. Details stehen in `COSTS_AND_LICENSES.md`.
