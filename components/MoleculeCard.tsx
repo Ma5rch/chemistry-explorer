@@ -16,19 +16,25 @@ export default function MoleculeCard({ c }: { c: Compound }) {
         <figure className="m-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={structureImageUrl(c.cid)} alt={`2D-Struktur, PubChem CID ${c.cid}`} className="aspect-square w-full rounded-xl bg-white object-contain" />
-          <figcaption className="mt-1 text-xs text-muted">2D-Darstellung von PubChem</figcaption>
+          <figcaption className="mt-1 text-xs text-muted">2D-Darstellung von PubChem (Datenbankinformation)</figcaption>
         </figure>
         <dl className="min-w-0 text-sm">
-          {rows.filter(([, value]) => value).map(([label, value]) => (
-            <div key={label} className="border-b border-line py-2 last:border-0">
-              <dt className="text-muted">{label}</dt><dd className="m-0 break-words font-medium">{value}</dd>
+          {rows.filter(([, v]) => v).map(([k, v]) => (
+            <div key={k} className="border-b border-line py-2 last:border-0">
+              <dt className="text-muted">{k}</dt>
+              <dd className="m-0 break-words font-medium">{v}</dd>
             </div>
           ))}
           <p className="mt-3 text-xs text-muted">
-            Quelle: <a className="text-accent underline" href={compoundPageUrl(c.cid)} target="_blank" rel="noreferrer">PubChem CID {c.cid}</a>.
-            Werte stammen aus der Datenbank.
+            Quelle:{" "}
+            <a className="text-accent underline" href={compoundPageUrl(c.cid)} target="_blank" rel="noreferrer">
+              PubChem CID {c.cid}
+            </a>
+            . Werte stammen aus der Datenbank, nicht aus eigener Berechnung.
           </p>
-          {c.smiles && <Link href={`/editor?smiles=${encodeURIComponent(c.smiles)}`} className="mt-3 inline-flex min-h-10 items-center rounded-xl border border-line px-4 text-sm">Im Editor öffnen</Link>}
+          {c.smiles && (
+            <Link href={`/editor?smiles=${encodeURIComponent(c.smiles)}`} className="mt-3 inline-flex min-h-10 items-center rounded-xl border border-line px-4 text-sm">Im Editor öffnen</Link>
+          )}
         </dl>
       </div>
     </article>

@@ -8,6 +8,8 @@ export type PolymerEntry = {
   kind: string;
   facts: { label: string; value: string; state: KnowledgeState }[];
   note: string;
+  /** Optional: Wiederholungseinheit für die Modellrechnung. */
+  model?: { repeat: string; branched: boolean };
 };
 
 const unknownChain = {
@@ -43,6 +45,7 @@ export const POLYMERS: PolymerEntry[] = [
       unknownChain,
     ],
     note: "Die Kettenlänge ist variabel; es wird keine feste Struktur erzeugt.",
+    model: { repeat: "[→4)-α-D-Glcp-(1→]n", branched: false },
   },
   {
     id: "amylopectin",
@@ -56,6 +59,7 @@ export const POLYMERS: PolymerEntry[] = [
       { label: "Verzweigungsstruktur der Probe", value: "nicht bekannt", state: "unbekannt" },
     ],
     note: "Verzweigungsgrad und Kettenlängen variieren; es wird keine feste Struktur erzeugt.",
+    model: { repeat: "Ketten aus [→4)-α-D-Glcp-(1→]n, Verzweigungen über α-(1→6)", branched: true },
   },
   {
     id: "glycogen",
@@ -68,6 +72,7 @@ export const POLYMERS: PolymerEntry[] = [
       unknownChain,
     ],
     note: "Der Verzweigungsgrad der konkreten Probe ist nicht bekannt.",
+    model: { repeat: "Ketten aus [→4)-α-D-Glcp-(1→]n, Verzweigungen über α-(1→6)", branched: true },
   },
   {
     id: "cellulose",
@@ -81,6 +86,7 @@ export const POLYMERS: PolymerEntry[] = [
       unknownChain,
     ],
     note: "Die Kettenlänge ist variabel; es wird keine feste Struktur erzeugt.",
+    model: { repeat: "[→4)-β-D-Glcp-(1→]n", branched: false },
   },
 ];
 

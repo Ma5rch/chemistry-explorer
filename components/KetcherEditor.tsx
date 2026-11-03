@@ -5,13 +5,21 @@ import "ketcher-react/dist/index.css";
 import { StandaloneStructServiceProvider } from "ketcher-standalone";
 import type { Ketcher } from "ketcher-core";
 
-const provider = new StandaloneStructServiceProvider();
+const structServiceProvider = new StandaloneStructServiceProvider();
 
-export default function KetcherEditor({ onReady, onError }: {
+export default function KetcherEditor({
+  onReady,
+  onError,
+}: {
   onReady: (k: Ketcher) => void;
-  onError: (message: string) => void;
+  onError: (msg: string) => void;
 }) {
-  return <Editor staticResourcesUrl="" structServiceProvider={provider}
-    errorHandler={(message: string) => onError(String(message))}
-    onInit={(k: Ketcher) => onReady(k)} />;
+  return (
+    <Editor
+      staticResourcesUrl=""
+      structServiceProvider={structServiceProvider}
+      errorHandler={(m: string) => onError(String(m))}
+      onInit={(k: Ketcher) => onReady(k)}
+    />
+  );
 }
