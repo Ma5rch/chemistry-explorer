@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { analyze, type Result, type State } from "@/lib/analyze";
 import { addRecent, listRecent } from "@/lib/store";
 import MoleculeCard from "@/components/MoleculeCard";
+import SugarViewer from "@/components/SugarViewer";
+import { findSugar } from "@/lib/sugars";
 
 const QUICK = ["Glucose", "Fructose", "Galactose", "Saccharose", "Maltose", "Lactose", "Stärke", "Cellulose", "C6H12O6"];
 
@@ -137,6 +139,9 @@ export default function Home() {
               )}
 
               {current && <div className="mt-4"><MoleculeCard c={current} /></div>}
+              {result.input.kind === "name" && findSugar(result.input.value) && (
+                <div className="mt-4"><SugarViewer sugar={findSugar(result.input.value)!} /></div>
+              )}
             </>
           )}
         </section>

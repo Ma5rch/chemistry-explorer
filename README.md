@@ -12,7 +12,9 @@ Umgesetzt:
 - Stärke, Amylose, Amylopektin, Glykogen und Cellulose als variable Polymere ohne erfundene Kette
 - Letzte Suchen in IndexedDB, Dunkelmodus, PWA-Manifest
 
-Noch nicht umgesetzt: Fischer-/Haworth-Ansichten, Editor, Glykan-Modell, Nachweisreaktionen, Identifikator, Vergleich, Lernmodus, Service Worker.
+Phase 3 (Teil): Fischer- und Haworth-Ansicht mit α/β für Glucose, Galactose, Mannose (Pyranose) und Fructose (Furanose), aus Konfigurationsmodell erzeugt.
+
+Noch nicht umgesetzt: Sesselkonformation, weitere Zucker, Editor, Glykan-Modell, Nachweisreaktionen, Identifikator, Vergleich, Lernmodus, Service Worker.
 
 ## Lokal starten
 
