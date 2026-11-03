@@ -5,9 +5,9 @@ import { analyze, type Result, type State } from "@/lib/analyze";
 import { addRecent, listRecent } from "@/lib/store";
 import MoleculeCard from "@/components/MoleculeCard";
 import SugarViewer from "@/components/SugarViewer";
-import { findSugar } from "@/lib/sugars";
+import { findSugar, type Sugar } from "@/lib/sugars";
 
-const QUICK = ["Glucose", "Fructose", "Galactose", "Saccharose", "Maltose", "Lactose", "Stärke", "Cellulose", "C6H12O6"];
+const QUICK = ["Glucose", "Fructose", "Galactose", "Mannose", "Saccharose", "Maltose", "Lactose", "Stärke", "Cellulose", "C6H12O6"];
 
 const STATE_TEXT: Record<State, string> = {
   eindeutig: "Molekül eindeutig identifiziert.",
@@ -23,6 +23,7 @@ export default function Home() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
+  const [selectedSugar, setSelectedSugar] = useState<Sugar | null>(null);
   const [selected, setSelected] = useState(0);
   const [recent, setRecent] = useState<string[]>([]);
 
@@ -32,6 +33,8 @@ export default function Home() {
     const text = q.trim();
     if (!text) return;
     setQuery(text);
+    // Die lokalen Strukturzeichnungen sofort setzen – unabhängig von PubChem.
+    setSelectedSugar(findSugar(text) ?? null);
     setBusy(true);
     setError(null);
     try {
@@ -89,6 +92,12 @@ export default function Home() {
 
       {error && <p role="alert" className="mt-4 rounded-xl border border-warn p-3 text-warn">{error}</p>}
 
+      {selectedSugar && (
+        <div className="mt-6">
+          <SugarViewer sugar={selectedSugar} />
+        </div>
+      )}
+
       {result && (
         <section className="mt-6" aria-live="polite">
           <p className="text-sm text-muted">Erkannte Eingabe: {KIND_TEXT[result.input.kind]}{result.input.kind === "formula" ? ` (Hill-Notation: ${result.input.value})` : ""}</p>
@@ -139,9 +148,6 @@ export default function Home() {
               )}
 
               {current && <div className="mt-4"><MoleculeCard c={current} /></div>}
-              {result.input.kind === "name" && findSugar(result.input.value) && (
-                <div className="mt-4"><SugarViewer sugar={findSugar(result.input.value)!} /></div>
-              )}
             </>
           )}
         </section>
