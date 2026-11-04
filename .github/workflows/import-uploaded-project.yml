@@ -1,0 +1,35 @@
+name: Import uploaded Chemistry Explorer project
+on:
+  push:
+    paths:
+      - phase67-import-ready.txt
+permissions:
+  contents: write
+jobs:
+  import-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Extract uploaded project and commit
+        run: |
+          set -e
+          base64 -d phase67-upload.zip.b64 > /tmp/phase67.zip
+          unzip -t /tmp/phase67.zip
+          mkdir -p /tmp/phase67
+          unzip -q /tmp/phase67.zip -d /tmp/phase67
+          test -d /tmp/phase67/chemistry-explorer
+          cp -a /tmp/phase67/chemistry-explorer/. .
+          rm -f phase67-upload.zip.b64 phase67-import-ready.txt
+          rm -rf /tmp/phase67 /tmp/phase67.zip
+          rm -f .github/workflows/import-uploaded-project.yml
+          git add -A
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Add carbohydrate tests and identification tools"
+            git push origin HEAD:main
+          fi
