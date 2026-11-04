@@ -11,6 +11,8 @@ import { findSugar } from "@/lib/sugars";
 import { findGlycan } from "@/lib/glycan";
 import GlycanPanel from "@/components/GlycanPanel";
 import PolymerModel from "@/components/PolymerModel";
+import TestPanel from "@/components/TestPanel";
+import { profileForName } from "@/lib/profile";
 
 const QUICK = ["Glucose", "Fructose", "Galactose", "Saccharose", "Maltose", "Lactose", "Raffinose", "Maltotriose", "Stärke", "Amylose", "Glykogen", "Cellulose", "C6H12O6"];
 
@@ -69,6 +71,8 @@ export default function Home() {
           <button type="submit" disabled={busy || !query.trim()} className="min-h-12 rounded-xl bg-accent px-6 font-medium text-paper disabled:opacity-50">
             {busy ? "Analysiere …" : "Analysieren"}
           </button>
+          <Link href="/identifikator" className="flex min-h-12 items-center justify-center rounded-xl border border-line px-5 font-medium">Identifikator</Link>
+          <Link href="/tests" className="flex min-h-12 items-center justify-center rounded-xl border border-line px-5 font-medium">Nachweisreaktionen</Link>
           <Link href="/glycan" className="flex min-h-12 items-center justify-center rounded-xl border border-line px-5 font-medium">Zucker verknüpfen</Link>
           <Link href="/editor" className="flex min-h-12 items-center justify-center rounded-xl border border-line px-5 font-medium">Struktur zeichnen</Link>
         </div>
@@ -108,6 +112,7 @@ export default function Home() {
               </dl>
               <p className="mt-3 text-sm">{result.polymer.note}</p>
               <PolymerModel p={result.polymer} />
+              {profileForName(result.input.value) && <div className="mt-4"><TestPanel profile={profileForName(result.input.value)!} /></div>}
             </article>
           ) : (
             <>
@@ -145,6 +150,9 @@ export default function Home() {
               )}
               {result.input.kind === "name" && findSugar(result.input.value) && (
                 <div className="mt-4"><SugarViewer sugar={findSugar(result.input.value)!} /></div>
+              )}
+              {result.input.kind === "name" && profileForName(result.input.value) && (
+                <div className="mt-4"><TestPanel profile={profileForName(result.input.value)!} /></div>
               )}
             </>
           )}

@@ -7,6 +7,8 @@ import {
   type Anom, type Glycan, type Residue, type SugarKey,
 } from "@/lib/glycan";
 import GlycanPanel from "@/components/GlycanPanel";
+import TestPanel from "@/components/TestPanel";
+import { profileFromGlycan } from "@/lib/profile";
 
 const SUGARS = Object.keys(SUGAR_INFO) as SugarKey[];
 const selectCls = "min-h-11 rounded-xl border border-line bg-paper px-3";
@@ -125,7 +127,11 @@ export default function GlycanBuilder() {
           {g.residues.length === 0 ? (
             <p className="rounded-2xl border border-line bg-card p-5 text-muted">Wähle links einen Wurzelbaustein oder lade ein bekanntes Oligosaccharid.</p>
           ) : (
-            <GlycanPanel selectedId={selectedId} onSelectId={setSelectedId} glycan={g} title={known ? known.de : g.residues.length === 1 ? `D-${SUGAR_DE[g.residues[0].sugar]}` : "Eigene Struktur"} klass={known?.klass} />
+            <div className="grid gap-4"><GlycanPanel selectedId={selectedId} onSelectId={setSelectedId} glycan={g} title={known ? known.de : g.residues.length === 1 ? `D-${SUGAR_DE[g.residues[0].sugar]}` : "Eigene Struktur"} klass={known?.klass} />
+            {known && profileFromGlycan(g, known.de) && <TestPanel profile={profileFromGlycan(g, known.de)!} />}
+            {!known && g.residues.length === 1 && profileFromGlycan(g, "") && <TestPanel profile={profileFromGlycan(g, "")!} />}
+            {!known && g.residues.length > 1 && profileFromGlycan(g, "Eigene Struktur") && <TestPanel profile={profileFromGlycan(g, "Eigene Struktur")!} />}
+            </div>
           )}
         </div>
       </div>

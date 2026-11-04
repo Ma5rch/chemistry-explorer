@@ -18,6 +18,10 @@ Phase 4 (neu, ungetestet): Struktur-Editor unter /editor mit Ketcher, automatisc
 
 Phase 5 (neu, ungetestet im Browser): Glykan-Modell (Bausteine und Bindungen) in `lib/glycan.ts`, Wissensbasis mit Maltose, Lactose, Saccharose, Cellobiose, Isomaltose, Trehalose, Maltotriose und Raffinose, berechnete Summenformel, Molmasse, reduzierende Enden, Verzweigungen, Hydrolyse-Simulation, anklickbare Schema-Darstellung (SNFG-Farben), Baukasten unter /glycan und Modellrechnung für Polysaccharide (Polymerisationsgrad n).
 
+Phase 6 (neu, ungetestet im Browser): Wissensdatenbank mit neun Informationskarten (GOD, Seliwanoff, Fehling, Benedict, Barfoed, Iod, Molisch, Bial, Hydrolyse), automatische Zuordnung je Molekül aus der Struktur (reduzierende Enden, Ketose, Glucose, Polymertyp), Unterscheidung direkt und nach Hydrolyse, Sicherheitsbereich, Seite /tests. Die Zuordnung wurde gegen die Ergebnismatrix der Vorgabe getestet.
+
+Phase 7 (neu, ungetestet im Browser): Kohlenhydrat-Identifikator unter /identifikator. Wählbare, geschlossene Kandidatenliste (Standard: Glucose, Stärke, Fructose, Saccharose, Galactose), Eintrag von Beobachtungen je Test (auch nach Hydrolyse), schrittweise Eingrenzung, Begründung der Ausschlüsse, Test-Vorschläge nach Trennschärfe, Widerspruchserkennung ohne voreilige Identifizierung. Keine Prozentangaben. Die Logik (`lib/identify.ts`) wurde mit zehn Szenarien getestet.
+
 Noch nicht umgesetzt: Sesselkonformation, weitere Zucker, Editor, Glykan-Modell, Nachweisreaktionen, Identifikator, Vergleich, Lernmodus, Service Worker.
 
 ## Lokal starten
